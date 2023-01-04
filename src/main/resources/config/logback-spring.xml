@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="false" scanPeriod="60 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!--<property name="FILE_NAME" value="./log/wisecare-app" />
+
+    &lt;!&ndash; FILE Appender &ndash;&gt;
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        &lt;!&ndash; 일자별 로그파일 저장 &ndash;&gt;
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FILE_NAME}_%d{yyyyMMdd}.log</fileNamePattern>
+            &lt;!&ndash; 일자별 로그파일 저장 기간 설정 &ndash;&gt;
+            <maxHistory>180</maxHistory> 
+        </rollingPolicy>
+		<encoder>
+			<charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } -&#45;&#45; [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+        </encoder>
+    </appender>-->
+
+
+	<!-- Console Appender -->
+	<appender name="CONSOL" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+		</encoder>
+	</appender>
+      
+	<logger name="jdbc.sqlonly" level="INFO"/>	
+	<logger name="jdbc.sqltiming" level="OFF"/>
+	<logger name="jdbc.resultsettable" level="INFO"/>
+	<logger name="jdbc" level="OFF"/>	
+	<logger name="jdbc.audit" level="OFF"/>
+	<logger name="jdbc.resultset" level="OFF"/>	
+	<logger name="jdbc.connection" level="OFF"/>
+	
+    
+    <!-- 모든 로그 출력 (파일/콘솔) -->
+    <root level="INFO">
+		<!--&lt;!&ndash;<appender-ref ref="FILE"/>&ndash;&gt;
+        <appender-ref ref="CONSOL"/>-->
+    </root>
+ 
+</configuration>
+
+

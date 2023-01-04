@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.study.dao.MemberDao">
+    <select id="register" resultType="MemberDto">
+        SELECT member_email, member_name, member_phone FROM tb_member
+        WHERE member_password = #{member_password}
+        AND    member_email = #{member_email}
+    </select>
+    <select id="search" resultType="MemberDto">
+        SELECT * FROM tb_member
+    </select>
+</mapper>
