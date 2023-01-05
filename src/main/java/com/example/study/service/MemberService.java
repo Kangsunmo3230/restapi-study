@@ -2,6 +2,7 @@ package com.example.study.service;
 
 
 import com.example.study.dao.MemberDao;
+import com.example.study.dto.LoginDto;
 import com.example.study.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,17 +15,23 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 public class MemberService {
-    @Autowired
-    MemberDao memberDao;
+    private final MemberDao memberDao;
 
-
-    public MemberDto register(String member_email, String member_password) {
-        System.out.print("service");
-            return memberDao.register(member_email,member_password);
+    public MemberDto login(LoginDto loginDto) {
+        return memberDao.login(loginDto);
     }
 
 
     public List<MemberDto> search() {
         return memberDao.search();
+
+    }
+
+    public MemberDto searchMemberByEmail(String memberEmail) {
+        return memberDao.searchMemberByEmail(memberEmail);
+    }
+
+    public void insert(MemberDto memberDto) {
+         memberDao.insert(memberDto);
     }
 }

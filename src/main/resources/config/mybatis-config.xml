@@ -15,6 +15,8 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<!-- select 결과값이 null라도 key생성 --> 
 		<setting name="callSettersOnNulls" value="true"/>
+		<!-- 카멜 케이스 VO 매핑 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 
 
