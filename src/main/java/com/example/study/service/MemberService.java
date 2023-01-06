@@ -3,6 +3,7 @@ package com.example.study.service;
 
 import com.example.study.dao.MemberDao;
 import com.example.study.dto.LoginDto;
+import com.example.study.dto.MemberDetailDto;
 import com.example.study.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,14 +18,13 @@ import java.util.List;
 public class MemberService {
     private final MemberDao memberDao;
 
-    public MemberDto login(LoginDto loginDto) {
+    public MemberDetailDto login(LoginDto loginDto) {
         return memberDao.login(loginDto);
     }
 
 
     public List<MemberDto> search() {
         return memberDao.search();
-
     }
 
     public MemberDto searchMemberByEmail(String memberEmail) {

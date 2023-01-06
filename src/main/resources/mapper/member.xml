@@ -4,10 +4,10 @@
 
 <mapper namespace="com.example.study.dao.MemberDao">
 
-    <select id="login" parameterType="LoginDto" resultType="MemberDto">
+    <select id="login" parameterType="LoginDto" resultType="MemberDetailDto">
         SELECT member_email, member_name, member_phone FROM tb_member
-        WHERE member_password = #{member_password}
-        AND    member_email = #{member_email}
+        WHERE member_email = #{memberEmail}
+        AND    member_password = #{memberPassword}
     </select>
 
     <select id="search" resultType="MemberDto">
@@ -15,17 +15,17 @@
     </select>
 
     <select id="searchMemberByEmail" parameterType="String" resultType="MemberDto">
-        select * from tb_member where member_email = #{member_email}
+        select * from tb_member where member_email = #{memberEmail}
     </select>
 
     <insert id ="insert" parameterType="MemberDto">
         INSERT INTO tb_member(
             member_email,member_password ,member_name,member_phone)
         VALUES (
-                   #{member_email},
-                   #{member_password},
-                   #{member_name},
-                   #{member_phone}
+                   #{memberEmail},
+                   #{memberPassword},
+                   #{memberName},
+                   #{memberPhone}
               );
 
     </insert>

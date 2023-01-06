@@ -3,17 +3,22 @@ package com.example.study.controller;
 
 import com.example.study.dao.MemberDao;
 import com.example.study.dto.LoginDto;
+import com.example.study.dto.MemberDetailDto;
 import com.example.study.dto.MemberDto;
 import com.example.study.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
-@Slf4j
+
 
 /*
  *   @Controller vs @RestController
@@ -24,29 +29,32 @@ import java.util.List;
  * */
 
 @RequiredArgsConstructor
-
+@Slf4j
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {
 
-    /**
-     * private final vs private static final
-     * private final 은 생성자를 통해 값을 참조할 수 있다. 객체 생성 시 초기화가 가능하다.
-     * private static final은 생성자를 통해 참조할 수 없고 무조건 초기화돼있어야 함. => 해당 값을 바꾸지 않음
-     */
-
     private final MemberService memberService;
 
+    /*
+     * ResponseEntity는 HttpEntity를 상속받고 사용자의 응답 데이터가 포함된 클래스 (HttpStatus , HttpHeaders, HttpBody)
+     * http header에는 (요청/응답)에 대한 요구사항
+     * http body에는 그내용
+     * Response header 에는 웹서버가 웹브라우저에 응답하는 메시지가 들어있고, Reponse body에 데이터 값이 들어가있음.
+     * */
 
     /*로그인*/
     @PostMapping(value = "/login")
-    public MemberDto login(@RequestBody LoginDto loginDto) {
-        log.info("loginDto ={}",loginDto);
+    public ResponseEntity<MemberDetailDto> login(@Valid @RequestBody LoginDto loginDto) {
 
-        MemberDto memberDto = memberService.login(loginDto);
-        log.info("memberDto ={}",memberDto);
+        MemberDetailDto memberDetailDto = memberService.login(loginDto);
 
-        return memberDto;
+        if (memberDetailDto != null) {
+            return new ResponseEntity<MemberDetailDto>(memberDetailDto, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
+
     }
 
     /*회원 가입*/
