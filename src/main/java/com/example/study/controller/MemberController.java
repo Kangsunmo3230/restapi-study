@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -48,7 +47,6 @@ public class MemberController {
     public ResponseEntity<MemberDetailDto> login(@Valid @RequestBody LoginDto loginDto) {
 
         MemberDetailDto memberDetailDto = memberService.login(loginDto);
-
         if (memberDetailDto != null) {
             return new ResponseEntity<MemberDetailDto>(memberDetailDto, HttpStatus.OK);
         } else {
@@ -60,7 +58,6 @@ public class MemberController {
     /*회원 가입*/
     @PostMapping(value = "/insert")
     public void insert(@RequestBody MemberDto memberDto) {
-        log.info("memberDto ={}", memberDto);
         memberService.insert(memberDto);
     }
 
@@ -69,17 +66,13 @@ public class MemberController {
     @GetMapping(value = "/search")
     public List<MemberDto> search() {
         List<MemberDto> memberDtos = memberService.search();
-        log.info("memberDtos =>{}", memberDtos);
-        log.info("memberDtos=>{}", memberDtos.toString());
         return memberDtos;
     }
 
     /*이메일를 통해 검색*/
     @GetMapping(value = "/{memberEmail}")
     public MemberDto searchMemberByEmail(@PathVariable String memberEmail) {
-        log.info("memberEmail ={}", memberEmail);
         MemberDto memberDto = memberService.searchMemberByEmail(memberEmail);
-        log.info("memberDto ={}", memberDto);
         return memberDto;
     }
 

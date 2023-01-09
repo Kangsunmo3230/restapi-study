@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class MemberDetailDto {
 
     @NotNull(message="이메일은 필수 항목입니다.")

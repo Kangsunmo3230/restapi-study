@@ -8,6 +8,7 @@ import com.example.study.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +18,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberDao memberDao;
+    private final PasswordEncoder passwordEncoder;
 
     public MemberDetailDto login(LoginDto loginDto) {
-        return memberDao.login(loginDto);
+        MemberDto checkUser = memberDao.searchMemberByEmail(loginDto.getMemberEmail());
+
+
+        if (passwordEncoder.matches(loginDto.getMemberPassword(), checkUser.getMemberPassword())) {
+            MemberDetailDto loginUser = memberDao.login(loginDto);
+            return loginUser;
+        } else {
+            return null;
+        }
+
     }
 
 
@@ -32,6 +43,8 @@ public class MemberService {
     }
 
     public void insert(MemberDto memberDto) {
-         memberDao.insert(memberDto);
+        String enPw = passwordEncoder.encode(memberDto.getMemberPassword());
+        memberDto.setMemberPassword(passwordEncoder.encode(memberDto.getMemberPassword()));
+        memberDao.insert(memberDto);
     }
 }

@@ -17,4 +17,6 @@ public interface MemberDao {
     MemberDto searchMemberByEmail(String memberEmail);
 
     void insert(MemberDto memberDto);
+
+    MemberDto getUser(String memberEmail);
 }
