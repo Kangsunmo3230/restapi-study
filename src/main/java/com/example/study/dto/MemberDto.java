@@ -1,10 +1,9 @@
 package com.example.study.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -12,7 +11,7 @@ import java.util.Date;
 
 @AllArgsConstructor
 @Data
-
+@RequiredArgsConstructor
 
 public class MemberDto {
 
@@ -46,4 +45,6 @@ public class MemberDto {
 
     //수정일시
     private Date modifyDtm;
+
+
 }
