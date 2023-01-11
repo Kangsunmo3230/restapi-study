@@ -7,6 +7,7 @@ public enum ApiExceptionType {
     TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, 401001, "token expired"),
     BAD_TOKEN(HttpStatus.UNAUTHORIZED, 401002, "token exception"),
     NO_DATA(HttpStatus.NOT_FOUND, 404001, "no data"),
+    INVALID_PARAM(HttpStatus.BAD_REQUEST, 404003, "Invalid parameters"),
     INTERNAL_SERVER(HttpStatus.INTERNAL_SERVER_ERROR, 500000),
     ;
 
